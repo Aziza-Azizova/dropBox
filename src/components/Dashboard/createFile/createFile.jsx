@@ -7,6 +7,7 @@ import { makeFile } from '../../../redux/createActions/createItemsAction'
 const CreateFile = ({setNewFileMO}) => {
     const [fileName, setfileName] = useState("")
     const [fileCreated, setFileCreatred] = useState(false)
+
     const {userFiles ,user, currentDir, currentDirInfo} = useSelector((state) => ({
         userFiles: state.fileFolders.userFiles,
         user: state.auth.user,
@@ -24,10 +25,13 @@ const CreateFile = ({setNewFileMO}) => {
         }
     }, [fileCreated])
 
-    const isFilePresent = (name) => {
+    const isFilePresent = (name, txt) => {
+        if(!txt){
+            name = name + ".txt"
+        }
         const yesPresent = userFiles
             .filter((f) => f.data.parent === currentDir)
-            .find((f) => f.data.name === name);
+            .find((d) => d.data.name === name);
         if(yesPresent){
             return true
         } else {
@@ -43,7 +47,7 @@ const CreateFile = ({setNewFileMO}) => {
                 if(fileName.split(".").length > 1){
                     txt = true
                 }
-                if(!isFilePresent(fileName)){
+                if(!isFilePresent(fileName, txt)){
                     const data = {
                         createdAt: new Date(),
                         name: txt ? fileName : `${fileName}.txt`,
@@ -83,7 +87,7 @@ const CreateFile = ({setNewFileMO}) => {
                 <div className="d-flex flex-column align-items-center">
                     <form className="mt-3 w-100" onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <input type="text" className="form-control" id="fileName" value={fileName} placeholder="File Name, e.g.: index.txt, index.html" onChange={e => setfileName(e.target.value)} />
+                            <input type="text" className="form-control" id="fileName" value={fileName} placeholder="File Name, e.g.: index.txt, index.html" onChange={(e) => setfileName(e.target.value)} />
                         </div>
                         <button type="submit" className="btn btn-primary mt-5 form-control">Create File</button>
                     </form>

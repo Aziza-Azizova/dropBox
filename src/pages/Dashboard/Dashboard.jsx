@@ -36,16 +36,8 @@ const Dashboard = () => {
 
   return (
     <>
-    {
-      newDirModal &&(
-        <CreateDir setNewDirModal={setNewDirModal}/>
-      )
-    }
-    {
-      newFileM &&(
-        <CreateFile setNewFileMO={setNewFileM}/>
-      )
-    }
+    {newDirModal &&(<CreateDir setNewDirModal={setNewDirModal}/>)}
+    {newFileM &&(<CreateFile setNewFileMO={setNewFileM}/>)}
         <NavbarDashboard/>
         <MainDashboardPage setNewDirModal={setNewDirModal} setNewFileM={setNewFileM}/>
         <Routes>

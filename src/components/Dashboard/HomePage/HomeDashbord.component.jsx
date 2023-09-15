@@ -4,7 +4,7 @@ import "./HomeDashbord.component.css"
 
 const HomeDashbord = () => {
 
-    const folders = ["New folder", "New folder 2"];
+    // const folders = ["New folder", "New folder 2"];
     const files = [{data: {name: "New File"}}, {data: {name: "New File 2"}}];
 
     const {isLoading, userFolder, userFiles} = useSelector(state => ({
@@ -12,7 +12,6 @@ const HomeDashbord = () => {
         userFolder: state.fileFolders.userFolder.filter(dir => dir.data.parent === "root"),
         userFiles: state.fileFolders.userFiles.filter((file) => file.data.parent === "root")
     }), shallowEqual)
-
     return (
         <div className="col-md-12 w-100">
             {
@@ -21,7 +20,9 @@ const HomeDashbord = () => {
                 ) : (
                     <>
                         <AllItems title={"Created Folders"} type={"folder"} items={userFolder}/>
-                        <AllItems title={"Created Files"} type={"file"} items={files}/>
+                        <AllItems title={"Created Files"} type={"file"} items={
+                            userFiles.filter(doc => doc.data.url === null)
+                        }/>
                     </>
                 )
             }

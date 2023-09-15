@@ -78,7 +78,7 @@ export const getAllFiles = (userId) => (dispatch) => {
         .then(async (f) => {
             const docsData = await f.docs.map((doc) => ({
                 data: doc.data(),
-                docId: dco.id
+                docId: doc.id
             }))
             dispatch(addAllFiles(docsData))
         })
