@@ -14,7 +14,7 @@ const AllItems = ({title, items, type}) => {
             dispatch(changeDPath(itemId))
             navigate(`/dashboard/folder/${itemId}`)
         }else{
-            alert("File clicked")
+            navigate(`/dashboard/file/${itemId}`)
         }
     }
 

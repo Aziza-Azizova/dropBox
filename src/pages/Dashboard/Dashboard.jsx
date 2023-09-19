@@ -8,11 +8,13 @@ import CreateDir from '../../components/Dashboard/createDirectory/createDir'
 import { getAllDirs, getAllFiles } from '../../redux/createActions/createItemsAction'
 import DirCmponent from '../../components/Dashboard/DirComponent/DirCmponent'
 import CreateFile from '../../components/Dashboard/createFile/createFile'
+import FileComponent from '../../components/Dashboard/FileComponent/File.component'
 
 
 const Dashboard = () => {
   const [newDirModal, setNewDirModal] = useState(false)
   const [newFileM, setNewFileM] = useState(false)
+  const [showMainPage, setShowMainPage] = useState(true)
 
   const {isLoggedin, isLoading, userId} = useSelector(state => ({isLoggedin: state.auth.isAuthenticated,
     isLoading: state.fileFolders.isLoading,
@@ -34,15 +36,24 @@ const Dashboard = () => {
     }
   }, [isLoading, userId, dispatch])
 
+  useEffect(() => {
+    if (window.location.pathname.includes("/file/")){
+      setShowMainPage(false)
+    }
+  }, [window.location.pathname])
+
   return (
     <>
     {newDirModal &&(<CreateDir setNewDirModal={setNewDirModal}/>)}
     {newFileM &&(<CreateFile setNewFileMO={setNewFileM}/>)}
         <NavbarDashboard/>
-        <MainDashboardPage setNewDirModal={setNewDirModal} setNewFileM={setNewFileM}/>
+        {
+          showMainPage && (<MainDashboardPage setNewDirModal={setNewDirModal} setNewFileM={setNewFileM} />)
+        }
         <Routes>
           <Route path="" element={<HomeDashbord/>} />
           <Route path="folder/:dirId" element={<DirCmponent/>} />
+          <Route path="file/:fileId" element={<FileComponent />} />
         </Routes>
     </>
   )
