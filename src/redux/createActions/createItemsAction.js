@@ -31,6 +31,10 @@ const addAllFiles = (payload) => ({
     payload
 })
 
+const fileData = (payload) => ({
+    type: types.FILE_DATA,
+    payload
+})
 
 export const createDir = (data) => (dispatch) => {
     initializeFirebase
@@ -94,4 +98,14 @@ export const makeFile = (data) => (dispatch, setFileCreatred) => {
     }).catch(() => {
         setFileCreatred(false)
     })
+}
+
+
+export const updFileData = (fileId, data) => (dispatch) => {
+    initializeFirebase.firestore().collection("docs").doc(fileId).update({data}).then(() => {
+        dispatch(fileData({fileId, data}));
+        alert("File updated successfully!")
+        }).catch(() => {
+            alert("Sorry, but something went wrong!")
+        })
 }
