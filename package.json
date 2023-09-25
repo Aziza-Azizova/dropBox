@@ -22,7 +22,8 @@
     "react-syntax-highlighter": "^15.5.0",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.4.2"
+    "redux-thunk": "^2.4.2",
+    "uuid-v4": "^0.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

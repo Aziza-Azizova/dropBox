@@ -8,26 +8,30 @@ const DirCmponent = () => {
     currentDirName: state.fileFolders.userFolder.find(dir => dir.docId === dirId)?.data,
     folderInDir: state.fileFolders.userFolder.filter(dir => dir.data.parent === dirId),
     babyFiles: state.fileFolders.userFiles.filter(doc => doc.data.parent === dirId)
-  }), shallowEqual)
+  }), shallowEqual);
+
+  const creatingFiles = babyFiles && babyFiles.filter((doc) => doc.data.url === null);
+  const uploadingDocs = babyFiles && babyFiles.filter((doc) => doc.data.data === null);
 
   return (
     <div>
       {
-        folderInDir.length > 0 
+        folderInDir.length > 0 || babyFiles.length > 0
           ? (
             <>
-            {
-              folderInDir.length > 0 && (
-                <AllItems title={"Created Folders"} type={"folder"} items={folderInDir}/>
-              )
-            }
-            {babyFiles.length > 0 && (
-              <AllItems title={"Created Files"} type={"file"} items={
-                babyFiles.filter((doc) => doc.data.url === null)
-                }/>
-              )
-            }
-             
+              {
+                folderInDir.length > 0 && (
+                  <AllItems title={"Created Folders"} type={"folder"} items={folderInDir}/>
+                )
+              }
+              
+              {creatingFiles && creatingFiles.length > 0 && (
+                <AllItems title={"Created Files"} items={creatingFiles} type={"file"} />)
+              }
+              {uploadingDocs && uploadingDocs.length > 0 && (
+                <AllItems title={"Uploaded Files"} items={uploadingDocs} type={"file"}/>
+                )
+              }
             </>
           ) 
           : (<p className="text-center my-2" style={{color: "gray"}}>Empty Folder</p>)

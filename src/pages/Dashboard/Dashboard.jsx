@@ -9,12 +9,14 @@ import { getAllDirs, getAllFiles } from '../../redux/createActions/createItemsAc
 import DirCmponent from '../../components/Dashboard/DirComponent/DirCmponent'
 import CreateFile from '../../components/Dashboard/createFile/createFile'
 import FileComponent from '../../components/Dashboard/FileComponent/File.component'
+import UploadFile from '../../components/Dashboard/UploadFile/UploadFile'
 
 
 const Dashboard = () => {
   const [newDirModal, setNewDirModal] = useState(false)
   const [newFileM, setNewFileM] = useState(false)
   const [showMainPage, setShowMainPage] = useState(true)
+  const [uploadFileMO, setUploadFileMO] = useState()
 
   const {isLoggedin, isLoading, userId} = useSelector(state => ({isLoggedin: state.auth.isAuthenticated,
     isLoading: state.fileFolders.isLoading,
@@ -37,24 +39,28 @@ const Dashboard = () => {
   }, [isLoading, userId, dispatch])
 
   useEffect(() => {
-    if (window.location.pathname.includes("/file/")){
+    if (window.location.pathname.includes("/file")){
       setShowMainPage(false)
+    } else{
+      setShowMainPage(true)
     }
   }, [window.location.pathname])
 
+  
   return (
     <>
-    {newDirModal &&(<CreateDir setNewDirModal={setNewDirModal}/>)}
-    {newFileM &&(<CreateFile setNewFileMO={setNewFileM}/>)}
-        <NavbarDashboard/>
-        {
-          showMainPage && (<MainDashboardPage setNewDirModal={setNewDirModal} setNewFileM={setNewFileM} />)
-        }
-        <Routes>
-          <Route path="" element={<HomeDashbord/>} />
-          <Route path="folder/:dirId" element={<DirCmponent/>} />
-          <Route path="file/:fileId" element={<FileComponent />} />
-        </Routes>
+      {newDirModal &&(<CreateDir setNewDirModal={setNewDirModal}/>)}
+      {newFileM &&(<CreateFile setNewFileMO={setNewFileM}/>)}
+      {uploadFileMO &&(<UploadFile setUploadFileMO={setUploadFileMO}/>)}
+      <NavbarDashboard/>
+      {
+        showMainPage && (<MainDashboardPage setNewDirModal={setNewDirModal} setNewFileM={setNewFileM} setUploadFileMO={setUploadFileMO} />)
+      }
+      <Routes>
+        <Route path="" element={<HomeDashbord/>} />
+        <Route path="folder/:dirId" element={<DirCmponent/>} />
+        <Route path="file/:fileId" element={<FileComponent />} />
+      </Routes>
     </>
   )
 }

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { shallowEqual, useDispatch, useSelector } from "react-redux"
 import { changeDPath } from "../../../redux/createActions/createItemsAction"
 
-const MainDashboardPage = ({setNewDirModal, setNewFileM}) => {
+const MainDashboardPage = ({setNewDirModal, setNewFileM, setUploadFileMO}) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -49,13 +49,13 @@ const MainDashboardPage = ({setNewDirModal, setNewFileM}) => {
         
         <ul className="navbar-nav ms-auto">
             <li className="nav-item mx-2">
-                <button className="btn btn-outline-dark"> <FontAwesomeIcon icon={faArrowUpFromBracket} style={{color: "8e7dd4"}} /></button>
+                <button title="Upload File" className="btn btn-outline-dark" onClick={() => setUploadFileMO(true)}> <FontAwesomeIcon icon={faArrowUpFromBracket} style={{color: "8e7dd4"}} /></button>
             </li>
             <li className="nav-item mx-2">
-                <button className="btn btn-outline-dark" onClick={() => setNewFileM(true)}><FontAwesomeIcon icon={faFileCirclePlus} style={{color: "#8e7dd4",}} /></button>
+                <button title="Create File" className="btn btn-outline-dark" onClick={() => setNewFileM(true)}><FontAwesomeIcon icon={faFileCirclePlus} style={{color: "#8e7dd4",}} /></button>
             </li>
             <li className="nav-item ms-2">
-                <button className="btn btn-outline-dark" onClick={() => setNewDirModal(true)}><FontAwesomeIcon icon={faFolderPlus} style={{color: "#8e7dd4",}} /></button>
+                <button title="Create Folder" className="btn btn-outline-dark" onClick={() => setNewDirModal(true)}><FontAwesomeIcon icon={faFolderPlus} style={{color: "#8e7dd4",}} /></button>
             </li>
         </ul>
     </nav>

@@ -3,10 +3,6 @@ import AllItems from "../AllItems/Allitems";
 import "./HomeDashbord.component.css"
 
 const HomeDashbord = () => {
-
-    // const folders = ["New folder", "New folder 2"];
-    const files = [{data: {name: "New File"}}, {data: {name: "New File 2"}}];
-
     const {isLoading, userFolder, userFiles} = useSelector(state => ({
         isLoading: state.fileFolders.isLoading,
         userFolder: state.fileFolders.userFolder.filter(dir => dir.data.parent === "root"),
@@ -22,6 +18,9 @@ const HomeDashbord = () => {
                         <AllItems title={"Created Folders"} type={"folder"} items={userFolder}/>
                         <AllItems title={"Created Files"} type={"file"} items={
                             userFiles.filter(doc => doc.data.url === null)
+                        }/>
+                        <AllItems title={"Uploaded Files"} type={"file"} items={
+                            userFiles.filter(doc => doc.data.data === null)
                         }/>
                     </>
                 )
