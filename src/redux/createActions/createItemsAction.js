@@ -116,13 +116,14 @@ export const uploadDoc = (file, data, setUploaded) => (dispatch) => {
     // const metadata = {
     //     contentType: `image/${data.extensions}`,
     // };
+    setUploaded(true)
     const uploadDocRef = initializeFirebase.storage().ref(`docs/${data.userId}/${data.name}.${data.extensions}`);
     uploadDocRef.put(file).on("state_changed", (snapshot) => {
         const prog = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
         if(isNaN(prog)){
-        console.log("uploading...");
+            console.log("uploading...");
         }else{
             console.log(`uploading ${prog}%`);
         }
@@ -139,9 +140,13 @@ export const uploadDoc = (file, data, setUploaded) => (dispatch) => {
             const docDatas = await (await file.get()).data();
             const  docId = file.id;
             dispatch(createFile({data: docDatas, docId: docId}))
-            setUploaded(true)
-        }).catch(() => {
-            setUploaded(false)
+            setUploaded(false);
+        }).catch((e) => {
+            console.log(e)
+        })
+        .finally(() => {
+            console.log('work')
+            setUploaded(false);
         })
     })
 }

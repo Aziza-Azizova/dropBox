@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
@@ -13,10 +13,14 @@ import { isLoggedIn } from './redux/createActions/createActions'
 
 const App = () => {
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
-    dispatch(isLoggedIn())
+    dispatch(isLoggedIn(setLoading))
   }, [])
+
+  if(loading) return null;
+
   return (
     <div className='App'>
       <ToastContainer/>

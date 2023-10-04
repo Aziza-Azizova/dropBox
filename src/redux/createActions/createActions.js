@@ -55,7 +55,7 @@ export const userSignOut = () => (dispatch) => {
     })
 }
 
-export const isLoggedIn = () => dispatch => {
+export const isLoggedIn = (setLoading) => dispatch => {
     initializeFirebase.auth().onAuthStateChanged(user => {
         if(user){
             dispatch(userLogin({
@@ -64,5 +64,6 @@ export const isLoggedIn = () => dispatch => {
                 displayName: user.displayName
             }))
         }
+        setLoading(false);
     })
 }
