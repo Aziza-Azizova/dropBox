@@ -9,7 +9,7 @@ const HomeDashbord = () => {
         userFiles: state.fileFolders.userFiles.filter((file) => file.data.parent === "root")
     }), shallowEqual)
     return (
-        <div className="col-md-12 w-100">
+        <div className="col-md-12 w-100 bg-white homeDash">
             {
                 isLoading ? (
                     <h1 className="display-6 my-5 text-center">Loading...</h1>

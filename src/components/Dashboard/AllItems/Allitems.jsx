@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { changeDPath } from "../../../redux/createActions/createItemsAction"
 
-const AllItems = ({title, items, type}) => {
+const AllItems = ({items, type}) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -19,8 +19,7 @@ const AllItems = ({title, items, type}) => {
     }
 
   return (
-    <div className="w-100">
-        {/* <h4 className="text-center py-4">{title}</h4> */}
+    <div>
         <div className="row gap-2 p-4 flex-wrap">
             {
                 items.map((item, index) => {

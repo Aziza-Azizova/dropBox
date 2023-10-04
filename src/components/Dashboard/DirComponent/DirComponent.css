@@ -1,7 +1,8 @@
-.homeDash{
+.dirComp{
     border-radius: 20px;
     padding: 20px 5px;
-    height: 80%;
+    height: 80vh;
     max-width: 98%;
     margin: 0 auto;
+    margin-bottom: 10px;
 }

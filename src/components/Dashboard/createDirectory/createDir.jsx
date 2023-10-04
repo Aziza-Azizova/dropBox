@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { createDir } from '../../../redux/createActions/createItemsAction'
+import { toast } from 'react-toastify'
 
 const CreateDir = ({setNewDirModal}) => {
     const [folderName, setfolderName] = useState("")
@@ -39,13 +40,13 @@ const CreateDir = ({setNewDirModal}) => {
                     }
                     dispatch(createDir(data))
                 } else {
-                    alert("Folder with this name already present")
+                    toast.warning("Folder with this name already present")
                 }
             } else{
-                alert(`Folder name should be at least 3 characters`)
+                toast.error(`Folder name should be at least 3 characters`)
             }
         } else{
-            alert(`Folder name cannot be empty`)
+            toast.error(`Folder name cannot be empty`)
         }
     }
 

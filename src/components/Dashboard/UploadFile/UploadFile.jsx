@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { uploadDoc } from '../../../redux/createActions/createItemsAction'
+import { toast } from 'react-toastify'
 
 const UploadFile = ({setUploadFileMO}) => {
     const [doc, setDoc] = useState(null)
@@ -53,12 +54,12 @@ const UploadFile = ({setUploadFileMO}) => {
                     data: null,
                     url: ""
                 }
-                dispatch(uploadDoc(file, data, setFileCreatred))
+                dispatch(uploadDoc(doc, data, setFileCreatred))
             } else {
-                alert("File with this name already present")
+                toast.warning("File with this name already present")
             }
         } else{
-            alert(`File name cannot be empty`)
+            toast.error(`File name cannot be empty, please enter the file name!`)
         }
     }
 

@@ -1,4 +1,4 @@
-import { faArrowUpFromBracket, faFileCirclePlus, faFolderPlus } from "@fortawesome/free-solid-svg-icons"
+import { faArrowDown, faArrowDownUpAcrossLine, faArrowUpFromBracket, faCloudArrowDown, faFileCirclePlus, faFolderPlus } from "@fortawesome/free-solid-svg-icons"
 import "./MainDashboardPage.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useNavigate } from "react-router-dom"
@@ -22,19 +22,19 @@ const MainDashboardPage = ({setNewDirModal, setNewFileM, setUploadFileMO}) => {
     }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light mt-2 bg-white px-5">
+    <nav className="navbar navbar-expand-lg navbar-light mt-2 px-5 miniNav">
         {currentDir !== "root" ? (
             <>
                 {currentDirInfo?.data.path.length === 0 ? (
                     <>
-                        <button className="btn btn-link text-decoration-none" onClick={() => handleClick("/dashboard", "root")}>
+                        <button className="btn text-decoration-none" onClick={() => handleClick("/dashboard", "root")}>
                             &lt; Back to All Documents
                         </button>
                     </>
                 ) : (
                     <>
                         {currentDirInfo?.data.path.map((dir, indx) => (
-                            <button key={indx} className="btn btn-link text-decoration-none" onClick={() => handleClick(`/dashboard/folder/${userFolder.find(f => dir === f.docId).docId}`, userFolder.find(f => dir === f.docId).docId)}>
+                            <button key={indx} className="btn text-decoration-none" onClick={() => handleClick(`/dashboard/folder/${userFolder.find(f => dir === f.docId).docId}`, userFolder.find(f => dir === f.docId).docId)}>
                                 &lt; Back
                             </button>
                         ))
@@ -43,19 +43,19 @@ const MainDashboardPage = ({setNewDirModal, setNewFileM, setUploadFileMO}) => {
                 )}
             </>
             ) : (
-                <p>All Documents</p>
+                <p className="nav" style={{fontWeight: "500"}}>All Documents</p>
             )
         }
         
-        <ul className="navbar-nav ms-auto">
-            <li className="nav-item mx-2">
-                <button title="Upload File" className="btn btn-outline-dark" onClick={() => setUploadFileMO(true)}> <FontAwesomeIcon icon={faArrowUpFromBracket} style={{color: "8e7dd4"}} /></button>
+        <ul className="navbar-nav gap-2" style={{margin: "0 auto"}}>
+            <li className="nav-item">
+                <button title="Upload File" className="btn btn-outline-dark" onClick={() => setUploadFileMO(true)} style={{padding: "5px 100px", marginRight:"35px"}}> Upload file <FontAwesomeIcon icon={faCloudArrowDown} style={{color: "8e7dd4", padding: "0 10px"}} /></button>
             </li>
-            <li className="nav-item mx-2">
-                <button title="Create File" className="btn btn-outline-dark" onClick={() => setNewFileM(true)}><FontAwesomeIcon icon={faFileCirclePlus} style={{color: "#8e7dd4",}} /></button>
+            <li className="nav-item">
+                <button title="Create File" className="btn btn-outline-dark" onClick={() => setNewFileM(true)} style={{padding: "5px 100px", marginRight:"35px"}}>Create File<FontAwesomeIcon icon={faFileCirclePlus} style={{color: "#8e7dd4", padding: "0 10px"}} /></button>
             </li>
-            <li className="nav-item ms-2">
-                <button title="Create Folder" className="btn btn-outline-dark" onClick={() => setNewDirModal(true)}><FontAwesomeIcon icon={faFolderPlus} style={{color: "#8e7dd4",}} /></button>
+            <li className="nav-item">
+                <button title="Create Folder" className="btn btn-outline-dark" onClick={() => setNewDirModal(true)} style={{padding: "5px 100px"}}>Create Folder<FontAwesomeIcon icon={faFolderPlus} style={{color: "#8e7dd4", padding: "0 10px"}} /></button>
             </li>
         </ul>
     </nav>

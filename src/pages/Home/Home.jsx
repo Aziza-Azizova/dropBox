@@ -19,10 +19,10 @@ export const Home = () => {
               </div>
                <div className="d-flex mt-3 justify-content-center">
                 <div className="mx-2">
-                  <Link className="btn btn-outline-secondary" to="/dashboard">Dashboard</Link>
+                  <Link className="btn btn-outline-dark" to="/dashboard">Dashboard</Link>
                 </div>
-                <div className="">
-                    <Link className="btn btn-outline-secondary" to="/" onClick={() => dispatch(userSignOut())}>Logout</Link>
+                <div className="mx-2">
+                    <Link className="btn btn-outline-dark" to="/" onClick={() => dispatch(userSignOut())}>Logout</Link>
                 </div>
                 </div>
               </>

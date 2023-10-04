@@ -1,6 +1,7 @@
 import { shallowEqual, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import AllItems from "../AllItems/Allitems"
+import "./DirComponent.css"
 
 const DirCmponent = () => {
   const { dirId} = useParams()
@@ -14,22 +15,22 @@ const DirCmponent = () => {
   const uploadingDocs = babyFiles && babyFiles.filter((doc) => doc.data.data === null);
 
   return (
-    <div>
+    <div className="dirComp bg-white">
       {
-        folderInDir.length > 0 || babyFiles.length > 0
+        folderInDir.length > 0 || babyFiles.length > 0 
           ? (
             <>
               {
                 folderInDir.length > 0 && (
-                  <AllItems title={"Created Folders"} type={"folder"} items={folderInDir}/>
+                  <AllItems type={"folder"} items={folderInDir}/>
                 )
               }
               
               {creatingFiles && creatingFiles.length > 0 && (
-                <AllItems title={"Created Files"} items={creatingFiles} type={"file"} />)
+                <AllItems items={creatingFiles} type={"file"} />)
               }
               {uploadingDocs && uploadingDocs.length > 0 && (
-                <AllItems title={"Uploaded Files"} items={uploadingDocs} type={"file"}/>
+                <AllItems items={uploadingDocs} type={"file"}/>
                 )
               }
             </>

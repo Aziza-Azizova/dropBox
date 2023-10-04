@@ -1,5 +1,6 @@
 import * as types from "../typeOfAction/typeOfAction"
 import initializeFirebase from "../../configures/firebase"
+import { toast } from "react-toastify"
 
 const userLogin = (payload) => {
     return{
@@ -20,7 +21,7 @@ export const userSignIn = (email, password, setSuccess) => (dispatch) => {
         dispatch(userLogin({uid: user.user.uid, email: user.user.email, displayName: user.user.displayName}))
         setSuccess(true);
     }).catch(() => {
-        alert("Invalid email or password")
+        toast.error("Invalid email or password")
     })
 }
 
@@ -37,13 +38,13 @@ export const userSignUp = (name, email, password, setSuccess) => (dispatch) => {
         })
     }).catch(err => {
         if(err.code === "auth/email-already-in-use"){
-            alert("This email already registered!")
+            toast.info("This email already registered!")
         }
         if(err.code === "auth/invalid-email"){
-            alert("Invalid Email!")
+            toast.error("Invalid Email!")
         }
         if(err.code === "auth/weak-password"){
-            alert("Weak Password!")
+            toast.warning("Weak Password!")
         }
     })
 }

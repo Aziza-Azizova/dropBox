@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { userSignUp } from '../../redux/createActions/createActions'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const RegisterForm = () => {
     const [name, setName] = useState("")
@@ -16,16 +17,16 @@ const RegisterForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!name || !email || !password || !confirmPassword){
-          alert("Please fill in all fields")
+          toast.error("Please fill in all fields")
           return;
         }
 
         if(password !== confirmPassword){
-            alert("Password do not match")
+            toast.error("Password do not match")
             return;
         }
         if(password.length < 6){
-            alert("Password should be at least 6 characters ")
+            toast.error("Password should be at least 6 characters ")
         }
   
         dispatch(userSignUp(name, email, password, setSuccess));
