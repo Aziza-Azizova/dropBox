@@ -33,10 +33,10 @@ export const Home = () => {
               <div className="text-center display-5 fw-bold">Welcome to Drop Box Project!</div>
               <div className="d-flex mt-3 justify-content-center">
                 <div className="mx-2">
-                  <Link className="btn btn-outline-secondary" to="/login">Login</Link>
+                  <Link className="btn btn-outline-dark" to="/login">Login</Link>
                 </div>
                 <div className="">
-                    <Link className="btn btn-outline-secondary" to="/register">Register</Link>
+                    <Link className="btn btn-outline-dark" to="/register">Register</Link>
                 </div>
                 </div>
               </>
