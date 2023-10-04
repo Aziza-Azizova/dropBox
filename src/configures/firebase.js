@@ -4,12 +4,12 @@ import "firebase/compat/firestore"
 import "firebase/compat/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAEryOCq2L93JYAJWtdrtbJ5V6QrmsS_Yo",
-    authDomain: "drop-box-831d7.firebaseapp.com",
-    projectId: "drop-box-831d7",
-    storageBucket: "drop-box-831d7.appspot.com",
-    messagingSenderId: "527155165227",
-    appId: "1:527155165227:web:dfacf478c71148c42f126e"
+    apiKey: import.meta.env.VITE_apiKey,
+    authDomain: import.meta.env.VITE_authDomain,
+    projectId: import.meta.env.VITE_projectId,
+    storageBucket: import.meta.env.VITE_storageBucket,
+    messagingSenderId: import.meta.env.VITE_messagingSenderId,
+    appId: import.meta.env.VITE_appId
   };
 
 
